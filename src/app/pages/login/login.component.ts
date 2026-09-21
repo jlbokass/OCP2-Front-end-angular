@@ -8,6 +8,8 @@ import { MaterialModule } from '../../shared/material.module';
 import { AuthService } from '../../core/service/auth.service';
 import { Login } from '../../core/models/Login';
 
+import { Router } from '@angular/router';
+
 @Component({
   selector: 'app-login',
   standalone: true,
@@ -23,6 +25,7 @@ export class LoginComponent implements OnInit {
   private readonly authService = inject(AuthService);
   private readonly formBuilder = inject(FormBuilder);
   private readonly destroyRef = inject(DestroyRef);
+  private readonly router = inject(Router);
 
   loginForm: FormGroup = new FormGroup({});
 
@@ -66,7 +69,7 @@ export class LoginComponent implements OnInit {
       .subscribe({
         next: response => {
           this.authService.storeToken(response.token);
-          this.successMessage = 'Connexion réussie.';
+          this.router.navigate(['/students']);
         },
         error: error => {
           if (error.status === 401) {

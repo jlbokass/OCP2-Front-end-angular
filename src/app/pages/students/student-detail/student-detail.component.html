@@ -1,0 +1,53 @@
+<div class="container mt-3">
+
+  @if (loading) {
+    <p>Chargement...</p>
+  }
+
+  @if (errorMessage) {
+    <div class="alert alert-danger">
+      {{ errorMessage }}
+    </div>
+  }
+
+  @if (student) {
+
+    <h1>
+      {{ student.firstName }}
+      {{ student.lastName }}
+    </h1>
+
+    <p>
+      <strong>ID :</strong>
+      {{ student.id }}
+    </p>
+
+    <a
+      class="btn btn-primary mr-2"
+      [routerLink]="[
+        '/students',
+        student.id,
+        'edit'
+      ]"
+    >
+      Modifier
+    </a>
+
+    <button
+      class="btn btn-danger mr-2"
+      type="button"
+      (click)="deleteStudent()"
+    >
+      Supprimer
+    </button>
+
+    <a
+      class="btn btn-secondary"
+      routerLink="/students"
+    >
+      Retour
+    </a>
+
+  }
+
+</div>

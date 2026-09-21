@@ -4,8 +4,11 @@ import { of, throwError } from 'rxjs';
 import { LoginComponent } from './login.component';
 import { AuthService } from '../../core/service/auth.service';
 
+import { Router, provideRouter } from '@angular/router';
+
 describe('LoginComponent', () => {
   let component: LoginComponent;
+  let router: Router;
   let fixture: ComponentFixture<LoginComponent>;
 
   const authServiceMock = {
@@ -25,9 +28,14 @@ describe('LoginComponent', () => {
         {
           provide: AuthService,
           useValue: authServiceMock
-        }
+        },
+        provideRouter([])
       ]
     }).compileComponents();
+
+    router = TestBed.inject(Router);
+    jest.spyOn(router, 'navigate')
+      .mockResolvedValue(true);
 
     fixture = TestBed.createComponent(LoginComponent);
     component = fixture.componentInstance;
@@ -58,8 +66,8 @@ describe('LoginComponent', () => {
     expect(authServiceMock.storeToken)
       .toHaveBeenCalledWith('JWT_TOKEN');
 
-    expect(component.successMessage)
-      .toBe('Connexion réussie.');
+    expect(router.navigate)
+      .toHaveBeenCalledWith(['/students']);
 
     expect(component.errorMessage).toBeNull();
   });
