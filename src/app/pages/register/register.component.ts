@@ -5,6 +5,7 @@ import { MaterialModule } from '../../shared/material.module';
 import { UserService } from '../../core/service/user.service';
 import { Register } from '../../core/models/Register';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-register',
@@ -18,6 +19,7 @@ export class RegisterComponent implements OnInit {
   private formBuilder = inject(FormBuilder);
   private destroyRef = inject(DestroyRef);
   registerForm: FormGroup = new FormGroup({});
+  private router = inject(Router);
   submitted: boolean = false;
 
   ngOnInit() {
@@ -50,8 +52,7 @@ export class RegisterComponent implements OnInit {
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe(
       () => {
-        alert('SUCCESS!! :-)');
-        // TODO : router l'utilisateur vers la page de login
+        this.router.navigate(['/login']);
       },
     );
   }
