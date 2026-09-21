@@ -1,0 +1,86 @@
+<div class="container mt-3">
+
+  <h1>
+    {{ editing ? 'Modifier un étudiant' : 'Ajouter un étudiant' }}
+  </h1>
+
+  @if (loading && editing) {
+    <p>Chargement...</p>
+  }
+
+  @if (errorMessage) {
+    <div class="alert alert-danger" role="alert">
+      {{ errorMessage }}
+    </div>
+  }
+
+  <form
+    [formGroup]="studentForm"
+    (ngSubmit)="onSubmit()"
+  >
+    <div class="form-group">
+      <label for="firstName">Prénom</label>
+
+      <input
+        id="firstName"
+        type="text"
+        class="form-control"
+        formControlName="firstName"
+        [ngClass]="{
+          'is-invalid':
+            submitted && form['firstName'].errors
+        }"
+      />
+
+      @if (
+        submitted &&
+        form['firstName'].errors?.['required']
+        ) {
+        <div class="invalid-feedback">
+          Le prénom est obligatoire.
+        </div>
+      }
+    </div>
+
+    <div class="form-group">
+      <label for="lastName">Nom</label>
+
+      <input
+        id="lastName"
+        type="text"
+        class="form-control"
+        formControlName="lastName"
+        [ngClass]="{
+          'is-invalid':
+            submitted && form['lastName'].errors
+        }"
+      />
+
+      @if (
+        submitted &&
+        form['lastName'].errors?.['required']
+        ) {
+        <div class="invalid-feedback">
+          Le nom est obligatoire.
+        </div>
+      }
+    </div>
+
+    <button
+      type="submit"
+      class="btn btn-primary mr-2"
+      [disabled]="loading"
+    >
+      {{ editing ? 'Enregistrer' : 'Ajouter' }}
+    </button>
+
+    <button
+      type="button"
+      class="btn btn-secondary"
+      (click)="cancel()"
+    >
+      Annuler
+    </button>
+  </form>
+
+</div>
