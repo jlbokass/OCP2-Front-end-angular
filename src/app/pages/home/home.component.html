@@ -1,0 +1,134 @@
+<main class="home">
+  <section class="hero" aria-labelledby="home-title">
+    <div class="hero__glow hero__glow--one" aria-hidden="true"></div>
+    <div class="hero__glow hero__glow--two" aria-hidden="true"></div>
+
+    <div class="container hero__container">
+      <div class="hero__content">
+        <span class="eyebrow">Gestion des étudiants</span>
+
+        <h1 id="home-title">
+          Une application simple pour
+          <span>gérer vos étudiants.</span>
+        </h1>
+
+        <p class="hero__lead">
+          Inscrivez-vous, connectez-vous et accédez à un espace sécurisé
+          pour consulter et gérer les étudiants.
+        </p>
+
+        <div class="hero__actions" aria-label="Actions principales">
+          <a class="btn-home btn-home--primary" routerLink="/login">
+            Se connecter
+          </a>
+
+          <a class="btn-home btn-home--secondary" routerLink="/register">
+            S'inscrire
+          </a>
+
+          <a class="btn-home btn-home--ghost" routerLink="/students">
+            Voir les étudiants
+            <span aria-hidden="true">→</span>
+          </a>
+        </div>
+
+        <p class="hero__hint">
+          L'espace étudiants est réservé aux utilisateurs authentifiés.
+        </p>
+      </div>
+
+      <div class="hero__visual" aria-hidden="true">
+        <div class="dashboard-card">
+          <div class="dashboard-card__top">
+            <div>
+              <span class="dashboard-card__label">Espace sécurisé</span>
+              <strong>Étudiants</strong>
+            </div>
+            <span class="status-dot"></span>
+          </div>
+
+          <div class="student-row student-row--featured">
+            <span class="avatar">AL</span>
+            <div>
+              <strong>Ada Lovelace</strong>
+              <small>Étudiante</small>
+            </div>
+            <span class="student-row__action">•••</span>
+          </div>
+
+          <div class="student-row">
+            <span class="avatar avatar--alt">AT</span>
+            <div>
+              <strong>Alan Turing</strong>
+              <small>Étudiant</small>
+            </div>
+            <span class="student-row__action">•••</span>
+          </div>
+
+          <div class="dashboard-card__footer">
+            <span>Ajouter</span>
+            <span class="dashboard-card__plus">+</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="features" aria-labelledby="features-title">
+    <div class="container">
+      <div class="section-heading">
+        <span class="eyebrow eyebrow--dark">Fonctionnalités</span>
+        <h2 id="features-title">L'essentiel, sans complexité inutile.</h2>
+        <p>
+          L'application se concentre sur les opérations attendues :
+          authentification et gestion des étudiants.
+        </p>
+      </div>
+
+      <div class="feature-grid">
+        <article class="feature-card">
+          <span class="feature-card__number">01</span>
+          <h3>Authentification</h3>
+          <p>
+            Créez votre compte puis connectez-vous avec un accès sécurisé
+            par JWT.
+          </p>
+        </article>
+
+        <article class="feature-card">
+          <span class="feature-card__number">02</span>
+          <h3>Gestion des étudiants</h3>
+          <p>
+            Ajoutez, consultez, modifiez et supprimez les étudiants depuis
+            une interface dédiée.
+          </p>
+        </article>
+
+        <article class="feature-card">
+          <span class="feature-card__number">03</span>
+          <h3>Accès protégé</h3>
+          <p>
+            Les pages de gestion sont protégées et réservées aux utilisateurs
+            authentifiés.
+          </p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta">
+    <div class="container">
+      <div class="cta__panel">
+        <div>
+          <span class="eyebrow eyebrow--light">Prêt à commencer ?</span>
+          <h2>Accédez à votre espace étudiant.</h2>
+        </div>
+
+        <a class="btn-home btn-home--light" routerLink="/login">
+          Se connecter
+          <span aria-hidden="true">→</span>
+        </a>
+      </div>
+    </div>
+  </section>
+</main>
