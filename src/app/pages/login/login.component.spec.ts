@@ -46,7 +46,8 @@ describe('LoginComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should authenticate and store the JWT', () => {
+  it('should authenticate, store the JWT and navigate to students', () => {
+    // GIVEN: valid credentials and a successful API response.
     authServiceMock.login.mockReturnValue(
       of({ token: 'JWT_TOKEN' })
     );
@@ -56,8 +57,10 @@ describe('LoginComponent', () => {
       password: 'password'
     });
 
+    // WHEN: the form is submitted.
     component.onSubmit();
 
+    // THEN: the token is stored and the user enters the protected area.
     expect(authServiceMock.login).toHaveBeenCalledWith({
       login: 'agent',
       password: 'password'
@@ -72,7 +75,8 @@ describe('LoginComponent', () => {
     expect(component.errorMessage).toBeNull();
   });
 
-  it('should display an error for invalid credentials', () => {
+  it('should display a dedicated error for invalid credentials', () => {
+    // GIVEN: the backend rejects the credentials.
     authServiceMock.login.mockReturnValue(
       throwError(() => ({ status: 401 }))
     );
@@ -82,8 +86,10 @@ describe('LoginComponent', () => {
       password: 'wrong-password'
     });
 
+    // WHEN: the form is submitted.
     component.onSubmit();
 
+    // THEN: no token is stored and the explicit authentication error is shown.
     expect(component.errorMessage)
       .toBe('Identifiant ou mot de passe incorrect.');
 
@@ -91,14 +97,36 @@ describe('LoginComponent', () => {
       .not.toHaveBeenCalled();
   });
 
+  it('should display a generic message for another server error', () => {
+    // GIVEN: the backend fails with a non-authentication error.
+    authServiceMock.login.mockReturnValue(
+      throwError(() => ({ status: 500 }))
+    );
+
+    component.loginForm.setValue({
+      login: 'agent',
+      password: 'password'
+    });
+
+    // WHEN: the form is submitted.
+    component.onSubmit();
+
+    // THEN: the generic error is exposed to the user.
+    expect(component.errorMessage)
+      .toBe('Une erreur est survenue. Veuillez réessayer.');
+  });
+
   it('should not call the API when the form is invalid', () => {
+    // GIVEN: both required fields are empty.
     component.loginForm.setValue({
       login: '',
       password: ''
     });
 
+    // WHEN: submission is attempted.
     component.onSubmit();
 
+    // THEN: no HTTP authentication request is triggered.
     expect(authServiceMock.login)
       .not.toHaveBeenCalled();
   });
