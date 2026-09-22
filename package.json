@@ -8,7 +8,10 @@
     "watch": "ng build --watch --configuration development",
     "test": "jest",
     "test:watch": "jest --watch",
-    "test:coverage": "jest --runInBand --coverage"
+    "test:coverage": "jest --runInBand --coverage",
+    "e2e": "cypress run",
+    "e2e:coverage": "node scripts/e2e-coverage.mjs",
+    "e2e:verify": "npm run e2e && npm run e2e:coverage"
   },
   "private": true,
   "dependencies": {
@@ -30,6 +33,7 @@
     "@angular/cli": "^19.2.16",
     "@angular/compiler-cli": "^19.2.0",
     "@types/jest": "^29.5.4",
+    "cypress": "^16.1.0",
     "jest": "^29.7.0",
     "jest-environment-jsdom": "^29.7.0",
     "jest-preset-angular": "^14.5.1",
